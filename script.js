@@ -16,29 +16,50 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection){
+  playerSelection = playerSelection.toLocaleLowerCase();
+
   if (playerSelection == computerSelection) {
-    console.log("Tie");
+    return("Tie");
   } else if (playerSelection == "rock"){
     if (computerSelection == "paper") {
-      console.log("You lose. Paper beats Rock.");
+      return("You lose. Paper beats Rock.");
     } else {
-      console.log("You win. Rock beats scissors");
+      return("You win. Rock beats scissors");
     }
   } else if (playerSelection == "paper"){
     if (computerSelection == "rock") {
-      console.log("You win. Paper beats Rock.");
+      return("You win. Paper beats Rock.");
     } else {
-      console.log("You lose. Scissors beats paper");
+      return("You lose. Scissors beats paper");
     }
   } else if (playerSelection == "scissors"){
     if (computerSelection == "paper") {
-      console.log("You Win. Scissors beats Paper.");
+      return("You win. Scissors beats Paper.");
     } else {
-      console.log("You Lose. Rock beats scissors");
+      return "You lose. Rock beats scissors" ;
     }
   }
 }
 
-const playerSelection = "rock";
-let computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+  let generalScore = 0;
+
+  for (let i = 0; i < 5; i++) {
+    let userInput = prompt("rock, paper, scissors?");
+    let roundResult = playRound(userInput,getComputerChoice());
+    if (roundResult[4] == 'w') {
+      generalScore++;
+    } else if (roundResult[4] == 'l') {
+      generalScore--;
+   }
+  }
+
+  if (generalScore > 0) {
+    return "player wins";
+  } else if (generalScore < 0) {
+    return "computer wins"
+  } else {
+    return "tie"
+  }
+  
+}
